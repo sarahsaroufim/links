@@ -4,3 +4,8 @@ video {
 	display: block;
 	width: 25%;
 }
+
+.padding {
+    padding-top: var(--gap);
+    padding-bottom: var(--gap);
+}

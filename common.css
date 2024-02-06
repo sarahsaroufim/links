@@ -1,0 +1,15 @@
+:root{
+    
+    --root-unit: 1rem;
+    --comfort-font-size: calc(1.5 * var(--root-unit));
+    --gap: calc(2 * var(--comfort-font-size));
+}
+
+html{
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden;
+}
