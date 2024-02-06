@@ -1,4 +1,6 @@
-img {
+
+img,
+video {
 	display: block;
 	width: 25%;
 }
