@@ -17,13 +17,22 @@ video {
 }
 
 header {
-    padding-top: var(--big-gap);
+    text-align: center;
 }
 
 h1 {
-    text-align: center;
-    font-style: italic;
+    padding-top: 18rem;
+    padding-bottom: 18rem;
     font-weight: 400;
+    color: gainsboro;
+}
+
+@media screen and (min-width: 650px) {
+    
+img,
+video {
+    max-width: 35rem;
+}
 }
 
 
