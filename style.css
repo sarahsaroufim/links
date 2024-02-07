@@ -2,7 +2,7 @@
 img,
 video {
 	display: block;
-	width: 25%;
+	width: 100%;
 }
 
 .padding {
@@ -13,5 +13,17 @@ video {
 .caption {
     padding-top: calc(0.5 * var(--small-gap));
     font-style: italic;
+    font-size: var(--root-unit);
 }
+
+header {
+    padding-top: var(--big-gap);
+}
+
+h1 {
+    text-align: center;
+    font-style: italic;
+    font-weight: 400;
+}
+
 
