@@ -6,6 +6,12 @@ video {
 }
 
 .padding {
-    padding-top: var(--gap);
-    padding-bottom: var(--gap);
+    padding-top: var(--small-gap);
+    padding-bottom: var(--small-gap);
 }
+
+.caption {
+    padding-top: calc(0.5 * var(--small-gap));
+    font-style: italic;
+}
+
