@@ -1,4 +1,23 @@
 
+:root{
+    
+    --root-unit: 1rem;
+    --comfort-font-size: calc(1.5 * var(--root-unit));
+    --small-gap: calc(2 * var(--comfort-font-size));
+    --medium-gap: calc(2 * var(--gap));
+    --big-gap: calc(2 * var(--medium-gap));
+}
+
+html{
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden;
+    font-family: Helvetica;
+}
+
 img,
 video {
 	display: block;
