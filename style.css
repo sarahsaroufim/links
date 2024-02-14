@@ -5,7 +5,7 @@
 
 main { max-width: 600px }
 
-a { color: blue; }
+a { color: rgb(255, 136, 0); }
 em { font-style: italic; }
 strong { font-weight: bold; }
 p { max-width: 50ch; }
