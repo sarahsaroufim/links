@@ -33,20 +33,23 @@ let renderBlock = (block) => {
 	// To start, a shared `ul` where we’ll insert all our blocks
 	let channelBlocks = document.getElementById('channel-blocks')
 
+	channelBlocks.classList.add('small-circles');
+
 	// Links!
+
 	if (block.class == 'Link') {
 		let linkItem =
 			`
 			<li>
-				<p><em>Link</em></p>
+				<!-- <p><em>Link</em></p> -->
 				<picture>
 					<source media="(max-width: 428px)" srcset="${ block.image.thumb.url }">
 					<source media="(max-width: 640px)" srcset="${ block.image.large.url }">
 					<img src="${ block.image.original.url }">
 				</picture>
-				<h3>${ block.title }</h3>
+				<!-- <h3>${ block.title }</h3>
 				${ block.description_html }
-				<p><a href="${ block.source.url }">See the original ↗</a></p>
+				<p><a href="${ block.source.url }">See the original ↗</a></p> -->
 			</li>
 			`
 		channelBlocks.insertAdjacentHTML('beforeend', linkItem)
@@ -54,17 +57,32 @@ let renderBlock = (block) => {
 
 	// Images!
 	else if (block.class == 'Image') {
-		// …up to you!
+        let imageItem =
+        `
+            <li class="block block--image">
+                <img src="${block.image.large.url}" alt="${block.title}" by "${block.user.fullname}">
+                <!-- <figcaption>${block.title}</fig> -->
+            </li>
+        `
+        channelBlocks.insertAdjacentHTML('beforeend', imageItem)
 	}
 
 	// Text!
 	else if (block.class == 'Text') {
-		// …up to you!
+		let textItem =
+			`
+			<li>
+				<blockquote>
+				${block.content_html}
+				</blockquote>
+			</li>
+			`
+		channelBlocks.insertAdjacentHTML('beforeend', textItem)
 	}
 
 	// Uploaded (not linked) media…
 	else if (block.class == 'Attachment') {
-		let attachment = block.attachment.content_type // Save us some repetition
+	let attachment = block.attachment.content_type // Save us some repetition
 
 		// Uploaded videos!
 		if (attachment.includes('video')) {
@@ -72,7 +90,7 @@ let renderBlock = (block) => {
 			let videoItem =
 				`
 				<li>
-					<p><em>Video</em></p>
+					<!-- <p><em>Video</em></p> -->
 					<video controls src="${ block.attachment.url }"></video>
 				</li>
 				`
@@ -81,10 +99,21 @@ let renderBlock = (block) => {
 			// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video
 		}
 
-		// Uploaded PDFs!
-		else if (attachment.includes('pdf')) {
-			// …up to you!
-		}
+        // Uploaded PDFs!
+        else if (attachment.includes('pdf')) {
+            let pdfItem =
+            `
+                <li>
+                    <a href="${block.attachment.url}">
+                        <figure>
+                            <img src="${block.image.large.url}" alt="${block.title}">
+                            <!-- <figcaption>${block.title}</figcaption> -->
+                        </figure>
+                    </a>
+                </li>
+            `
+        channelBlocks.insertAdjacentHTML('beforeend', pdfItem);
+        }
 
 		// Uploaded audio!
 		else if (attachment.includes('audio')) {
@@ -92,7 +121,7 @@ let renderBlock = (block) => {
 			let audioItem =
 				`
 				<li>
-					<p><em>Audio</em></p>
+					<!-- <p><em>Audio</em></p> -->
 					<audio controls src="${ block.attachment.url }"></video>
 				</li>
 				`
@@ -111,7 +140,7 @@ let renderBlock = (block) => {
 			let linkedVideoItem =
 				`
 				<li>
-					<p><em>Linked Video</em></p>
+					<!-- <p><em>Linked Video</em></p> -->
 					${ block.embed.html }
 				</li>
 				`
@@ -126,22 +155,17 @@ let renderBlock = (block) => {
 	}
 }
 
-
-
 // It‘s always good to credit your work:
 let renderUser = (user, container) => { // You can have multiple arguments for a function!
 	let userAddress =
 		`
 		<address>
-			<img src="${ user.avatar_image.display }">
 			<h3>${ user.first_name }</h3>
 			<p><a href="https://are.na/${ user.slug }">Are.na profile ↗</a></p>
 		</address>
 		`
 	container.insertAdjacentHTML('beforeend', userAddress)
 }
-
-
 
 // Now that we have said what we can do, go get the data:
 fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-store' })
@@ -152,7 +176,7 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 
 		// Loop through the `contents` array (list), backwards. Are.na returns them in reverse!
 		data.contents.reverse().forEach((block) => {
-			// console.log(block) // The data for a single block
+			console.log(block) // The data for a single block
 			renderBlock(block) // Pass the single block data to the render function
 		})
 
@@ -161,3 +185,41 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 		data.collaborators.forEach((collaborator) => renderUser(collaborator, channelUsers))
 		renderUser(data.user, channelUsers)
 	})
+
+
+
+
+// ________________________________________________________
+
+
+
+
+
+function moveCirclesAcross() {
+    let channelBlocks = document.querySelectorAll('.small-circles li');
+
+    channelBlocks.forEach(function(circle) {
+        // Starting position
+        let currentX = parseFloat(circle.style.left) || 0;
+        let currentY = parseFloat(circle.style.top) || 0;
+
+        // Drift
+        let newX = currentX + 1;
+        let newY = currentY;
+
+        // Off-screen reset
+        if (newX > window.innerWidth) {
+            newX = -parseFloat(circle.style.width) || 0;
+        }
+
+        // Update the position of the circle
+        circle.style.left = newX + 'px';
+        circle.style.top = newY + 'px';
+    });
+}
+
+// Call the function to start moving the circles across the page
+setInterval(moveCirclesAcross, 50); // Update every 50 milliseconds (adjust as needed)
+
+
+
