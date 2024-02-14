@@ -212,14 +212,13 @@ function moveCirclesAcross() {
             newX = -parseFloat(circle.style.width) || 0;
         }
 
-        // Update the position of the circle
+        // Update circle position
         circle.style.left = newX + 'px';
         circle.style.top = newY + 'px';
     });
 }
 
-// Call the function to start moving the circles across the page
-setInterval(moveCirclesAcross, 50); // Update every 50 milliseconds (adjust as needed)
+setInterval(moveCirclesAcross, 50);
 
 
 
