@@ -187,4 +187,18 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 	})
 
 
+// Random animation properties
+let circles = document.querySelectorAll('.circles');
+circles.forEach((circle) => {
+	let randomDuration = Math.random() * 150 + 30;
+	let randomX = Math.random() * (window.innerWidth - circle.offsetWidth); // Random X position within the window width
+	let randomY = Math.random() * (window.innerHeight - circle.offsetHeight); // Random Y position within the window height
+	
+	circle.style.setProperty('--random-duration', `${randomDuration}s`);
+	circle.style.setProperty('--random-delay', `0s`);
+	circle.style.setProperty('--random-x', `${randomX}px`);
+	circle.style.setProperty('--random-y', `${randomY}px`);
+});
+
+
 

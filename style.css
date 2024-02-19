@@ -23,9 +23,8 @@ body {
 }
 
 #channel-title {
-	font-style: italic;
 	font-weight: 700;
-	font-size: 2em;
+	font-size: 1.5em;
     margin-bottom: 1em;
 	position: absolute;
 	left: 50%;
@@ -33,18 +32,25 @@ body {
 }
 
 #channel-description {
-	font-size: 1.1em;
+	font-size: 1em;
 }
 
+@keyframes move {
+	0% { transform: translate(0, 0); }
+	100% { transform: translate(var(--random-x), var(--random-y)); }
+  }
+
 .circles li {
-    position: relative;
+    position: absolute;
     display: inline-block;
     width: 5em;
     height: 5em;
     border-radius: 50%;
     overflow: hidden;
+	animation: move var(--random-duration) linear infinite var(--random-delay);
 }
-.circles li::before {
+
+/* .circles li::before {
     content: '';
     position: absolute;
     top: 0;
@@ -53,7 +59,7 @@ body {
     height: 100%;
     background-color: rgba(143, 143, 143, 0.2);
     border-radius: 50%;
-}
+} */
 
 .circles img {
     width: 100%;
