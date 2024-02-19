@@ -36,17 +36,15 @@ body {
 	font-size: 1.1em;
 }
 
-
-
-.small-circles li {
+.circles li {
     position: relative;
     display: inline-block;
-    width: 5.5em;
-    height: 5.5em;
+    width: 5em;
+    height: 5em;
     border-radius: 50%;
     overflow: hidden;
 }
-.small-circles li::before {
+.circles li::before {
     content: '';
     position: absolute;
     top: 0;
@@ -56,7 +54,8 @@ body {
     background-color: rgba(143, 143, 143, 0.2);
     border-radius: 50%;
 }
-.small-circles img {
+
+.circles img {
     width: 100%;
     height: 100%;
     object-fit: cover;

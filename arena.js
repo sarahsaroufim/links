@@ -33,7 +33,7 @@ let renderBlock = (block) => {
 	// To start, a shared `ul` where we’ll insert all our blocks
 	let channelBlocks = document.getElementById('channel-blocks')
 
-	channelBlocks.classList.add('small-circles');
+	channelBlocks.classList.add('circles');
 
 	// Links!
 
@@ -185,40 +185,6 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 		data.collaborators.forEach((collaborator) => renderUser(collaborator, channelUsers))
 		renderUser(data.user, channelUsers)
 	})
-
-
-
-
-// ________________________________________________________
-
-
-
-
-
-function moveCirclesAcross() {
-    let channelBlocks = document.querySelectorAll('.small-circles li');
-
-    channelBlocks.forEach(function(circle) {
-        // Starting position
-        let currentX = parseFloat(circle.style.left) || 0;
-        let currentY = parseFloat(circle.style.top) || 0;
-
-        // Drift
-        let newX = currentX + 1;
-        let newY = currentY;
-
-        // Off-screen reset
-        if (newX > window.innerWidth) {
-            newX = -parseFloat(circle.style.width) || 0;
-        }
-
-        // Update circle position
-        circle.style.left = newX + 'px';
-        circle.style.top = newY + 'px';
-    });
-}
-
-setInterval(moveCirclesAcross, 50);
 
 
 
