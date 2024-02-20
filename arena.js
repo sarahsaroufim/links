@@ -33,7 +33,7 @@ let renderBlock = (block) => {
 	// To start, a shared `ul` where we’ll insert all our blocks
 	let channelBlocks = document.getElementById('channel-blocks')
 
-	channelBlocks.classList.add('circles');
+	// channelBlocks.classList.add('circles');
 
 	// Links!
 
@@ -188,12 +188,11 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 
 
 
-
 // random animation
 document.querySelectorAll('.circles').forEach((circle) => {
-    let randomDuration = Math.random() * 500 + 50;
+    let randomDuration = Math.random() * 5 + 0.5;
     let maxX = window.innerWidth - circle.offsetWidth; // max x position
-    let maxHeight = 312; // max y position
+    let maxHeight = 315; // max y position
     let randomX = Math.random() * maxX;
     let randomY = Math.random() * maxHeight;
     let speed = 1;
@@ -203,8 +202,8 @@ document.querySelectorAll('.circles').forEach((circle) => {
 
     circle.style.setProperty('--random-duration', `${randomDuration}s`);
     circle.style.setProperty('--random-delay', `0s`);
-    circle.style.setProperty('--random-x', `${randomX}px`);
-    circle.style.setProperty('--random-y', `${randomY}px`);
+    circle.style.setProperty('--random-x', `${randomX / window.innerWidth * 100}vw`);
+    circle.style.setProperty('--random-y', `${randomY / window.innerHeight * 100}vh`);
     circle.style.setProperty('--random-move-x', `${randomMoveX}px`);
     circle.style.setProperty('--random-move-y', `${randomMoveY}px`);
 
@@ -220,11 +219,10 @@ document.querySelectorAll('.circles').forEach((circle) => {
             randomMoveY *= -1; // reverse y direction
         }
 
-        circle.style.setProperty('--random-x', `${randomX}px`);
-        circle.style.setProperty('--random-y', `${randomY}px`);
+
+        circle.style.setProperty('--random-x', `${randomX / window.innerWidth * 100}vw`);
+        circle.style.setProperty('--random-y', `${randomY / window.innerHeight * 100}vh`);
     }
 
     setInterval(updatePosition, 40); // update position every 40 millisecs
 });
-
-

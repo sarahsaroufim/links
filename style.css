@@ -50,15 +50,15 @@ body {
 .circle {
 	position: absolute;
     display: inline-block;
-    width: 5em;
-    height: 5em;
+    width: 5.5vw;
+    height: 5.5vw;
     border-radius: 50%;
     overflow: hidden;
     animation: move var(--random-duration) linear infinite var(--random-delay);
     animation-iteration-count: infinite;
 }
 
-.circles img {
+.circle img {
     width: 100%;
     height: 100%;
     object-fit: cover;
