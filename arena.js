@@ -219,7 +219,6 @@ document.querySelectorAll('.circles').forEach((circle) => {
             randomMoveY *= -1; // reverse y direction
         }
 
-
         circle.style.setProperty('--random-x', `${randomX / window.innerWidth * 100}vw`);
         circle.style.setProperty('--random-y', `${randomY / window.innerHeight * 100}vh`);
     }
