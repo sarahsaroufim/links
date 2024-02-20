@@ -47,7 +47,7 @@ body {
     100% { transform: translate(calc(var(--random-x) + var(--random-move-x)), calc(var(--random-y) + var(--random-move-y))); }
 }
 
-.circles li {
+.circle {
 	position: absolute;
     display: inline-block;
     width: 5em;
@@ -56,17 +56,6 @@ body {
     overflow: hidden;
     animation: move var(--random-duration) linear infinite var(--random-delay);
     animation-iteration-count: infinite;
-}
-
-.circles li::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(143, 143, 143, 0.2);
-    border-radius: 50%;
 }
 
 .circles img {

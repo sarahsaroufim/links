@@ -89,7 +89,7 @@ let renderBlock = (block) => {
 			// …still up to you, but we’ll give you the `video` element:
 			let videoItem =
 				`
-				<li class="circles">
+				<li class="circle">
 					<!-- <p><em>Video</em></p> -->
 					<video controls src="${ block.attachment.url }"></video>
 				</li>
