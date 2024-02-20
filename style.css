@@ -15,6 +15,7 @@ body {
 
 	font-family: Helvetica;
 	font-style: italic;
+	text-transform: lowercase;
 
 	padding: var(--spacing);
     justify-content: center;
@@ -39,7 +40,6 @@ body {
 
 #channel-users {
 	margin-top: 16.3em;
-	text-transform: lowercase;
 }
 
 @keyframes move {

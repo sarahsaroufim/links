@@ -33,14 +33,14 @@ let renderBlock = (block) => {
 	// To start, a shared `ul` where we’ll insert all our blocks
 	let channelBlocks = document.getElementById('channel-blocks')
 
-	// channelBlocks.classList.add('circles');
+	channelBlocks.classList.add('circles');
 
 	// Links!
 
 	if (block.class == 'Link') {
 		let linkItem =
 			`
-			<li class="circles">
+			<li class="circle">
 				<!-- <p><em>Link</em></p> -->
 				<picture>
 					<source media="(max-width: 428px)" srcset="${ block.image.thumb.url }">
@@ -59,7 +59,7 @@ let renderBlock = (block) => {
 	else if (block.class == 'Image') {
         let imageItem =
         `
-            <li class="circles">
+            <li class="circle">
                 <img src="${block.image.large.url}" alt="${block.title}" by "${block.user.fullname}">
                 <!-- <figcaption>${block.title}</fig> -->
             </li>
@@ -71,7 +71,7 @@ let renderBlock = (block) => {
 	else if (block.class == 'Text') {
 		let textItem =
 			`
-			<li class="circles">
+			<li class="circle">
 				<blockquote>
 				${block.content_html}
 				</blockquote>
@@ -103,7 +103,7 @@ let renderBlock = (block) => {
         else if (attachment.includes('pdf')) {
             let pdfItem =
             `
-				<li class="circles">
+				<li class="circle">
                     <a href="${block.attachment.url}">
                         <figure>
                             <img src="${block.image.large.url}" alt="${block.title}">
@@ -120,7 +120,7 @@ let renderBlock = (block) => {
 			// …still up to you, but here’s an `audio` element:
 			let audioItem =
 				`
-				<li class="circles">
+				<li class="circle">
 					<!-- <p><em>Audio</em></p> -->
 					<audio controls src="${ block.attachment.url }"></video>
 				</li>
@@ -139,7 +139,7 @@ let renderBlock = (block) => {
 			// …still up to you, but here’s an example `iframe` element:
 			let linkedVideoItem =
 				`
-				<li class="circles">
+				<li class="circle">
 					<!-- <p><em>Linked Video</em></p> -->
 					${ block.embed.html }
 				</li>
@@ -161,7 +161,7 @@ let renderUser = (user, container) => { // You can have multiple arguments for a
 		`
 		<address>
 			<h3>${ user.first_name }</h3>
-			<p><a href="https://are.na/${ user.slug }">Are.na profile ↗</a></p>
+			<p><a href="https://are.na/${ user.slug }">are.na profile</a></p>
 		</address>
 		`
 	container.insertAdjacentHTML('beforeend', userAddress)
@@ -187,13 +187,17 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 	})
 
 
-// Random animation
+
+
+// random animation
 document.querySelectorAll('.circles').forEach((circle) => {
     let randomDuration = Math.random() * 500 + 50;
+    let maxX = window.innerWidth - circle.offsetWidth; // max x position
+    let maxHeight = 312; // max y position
+    let randomX = Math.random() * maxX;
+    let randomY = Math.random() * maxHeight;
+    let speed = 1;
     let randomAngle = Math.random() * 2 * Math.PI;
-    let speed = 590;
-    let randomX = Math.random() * (window.innerWidth - circle.offsetWidth);
-    let randomY = Math.random() * (window.innerHeight - circle.offsetHeight);
     let randomMoveX = Math.cos(randomAngle) * speed;
     let randomMoveY = Math.sin(randomAngle) * speed;
 
@@ -203,4 +207,24 @@ document.querySelectorAll('.circles').forEach((circle) => {
     circle.style.setProperty('--random-y', `${randomY}px`);
     circle.style.setProperty('--random-move-x', `${randomMoveX}px`);
     circle.style.setProperty('--random-move-y', `${randomMoveY}px`);
+
+    function updatePosition() {
+        randomX += randomMoveX;
+        randomY += randomMoveY;
+
+        if (randomX < 0 || randomX > maxX) {
+            randomMoveX *= -1; // reverse x direction
+        }
+
+        if (randomY < 0 || randomY > maxHeight) {
+            randomMoveY *= -1; // reverse y direction
+        }
+
+        circle.style.setProperty('--random-x', `${randomX}px`);
+        circle.style.setProperty('--random-y', `${randomY}px`);
+    }
+
+    setInterval(updatePosition, 40); // update position every 40 millisecs
 });
+
+
