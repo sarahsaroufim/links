@@ -180,16 +180,8 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 			renderBlock(block) // Pass the single block data to the render function
 		})
 
-		// Also display the owner and collaborators:
-		let channelUsers = document.getElementById('channel-users') // Show them together
-		data.collaborators.forEach((collaborator) => renderUser(collaborator, channelUsers))
-		renderUser(data.user, channelUsers)
-	})
-
-
-
 // random animation
-document.querySelectorAll('.circles').forEach((circle) => {
+document.querySelectorAll('.circle').forEach((circle) => {
     let randomDuration = Math.random() * 5 + 0.5;
     let maxX = window.innerWidth - circle.offsetWidth; // max x position
     let maxHeight = 315; // max y position
@@ -223,5 +215,12 @@ document.querySelectorAll('.circles').forEach((circle) => {
         circle.style.setProperty('--random-y', `${randomY / window.innerHeight * 100}vh`);
     }
 
-    setInterval(updatePosition, 40); // update position every 40 millisecs
+    setInterval(updatePosition, 100); // update position every 100 millisecs
 });
+
+
+		// Also display the owner and collaborators:
+		let channelUsers = document.getElementById('channel-users') // Show them together
+		data.collaborators.forEach((collaborator) => renderUser(collaborator, channelUsers))
+		renderUser(data.user, channelUsers)
+	})
