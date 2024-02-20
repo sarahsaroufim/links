@@ -33,14 +33,14 @@ let renderBlock = (block) => {
 	// To start, a shared `ul` where we’ll insert all our blocks
 	let channelBlocks = document.getElementById('channel-blocks')
 
-	channelBlocks.classList.add('circles');
+	// channelBlocks.classList.add('circles');
 
 	// Links!
 
 	if (block.class == 'Link') {
 		let linkItem =
 			`
-			<li>
+			<li class="circles">
 				<!-- <p><em>Link</em></p> -->
 				<picture>
 					<source media="(max-width: 428px)" srcset="${ block.image.thumb.url }">
@@ -59,7 +59,7 @@ let renderBlock = (block) => {
 	else if (block.class == 'Image') {
         let imageItem =
         `
-            <li class="block block--image">
+            <li class="circles">
                 <img src="${block.image.large.url}" alt="${block.title}" by "${block.user.fullname}">
                 <!-- <figcaption>${block.title}</fig> -->
             </li>
@@ -71,7 +71,7 @@ let renderBlock = (block) => {
 	else if (block.class == 'Text') {
 		let textItem =
 			`
-			<li>
+			<li class="circles">
 				<blockquote>
 				${block.content_html}
 				</blockquote>
@@ -89,7 +89,7 @@ let renderBlock = (block) => {
 			// …still up to you, but we’ll give you the `video` element:
 			let videoItem =
 				`
-				<li>
+				<li class="circles">
 					<!-- <p><em>Video</em></p> -->
 					<video controls src="${ block.attachment.url }"></video>
 				</li>
@@ -103,7 +103,7 @@ let renderBlock = (block) => {
         else if (attachment.includes('pdf')) {
             let pdfItem =
             `
-                <li>
+				<li class="circles">
                     <a href="${block.attachment.url}">
                         <figure>
                             <img src="${block.image.large.url}" alt="${block.title}">
@@ -120,7 +120,7 @@ let renderBlock = (block) => {
 			// …still up to you, but here’s an `audio` element:
 			let audioItem =
 				`
-				<li>
+				<li class="circles">
 					<!-- <p><em>Audio</em></p> -->
 					<audio controls src="${ block.attachment.url }"></video>
 				</li>
@@ -139,7 +139,7 @@ let renderBlock = (block) => {
 			// …still up to you, but here’s an example `iframe` element:
 			let linkedVideoItem =
 				`
-				<li>
+				<li class="circles">
 					<!-- <p><em>Linked Video</em></p> -->
 					${ block.embed.html }
 				</li>
@@ -187,18 +187,20 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 	})
 
 
-// Random animation properties
-let circles = document.querySelectorAll('.circles');
-circles.forEach((circle) => {
-	let randomDuration = Math.random() * 150 + 30;
-	let randomX = Math.random() * (window.innerWidth - circle.offsetWidth); // Random X position within the window width
-	let randomY = Math.random() * (window.innerHeight - circle.offsetHeight); // Random Y position within the window height
-	
-	circle.style.setProperty('--random-duration', `${randomDuration}s`);
-	circle.style.setProperty('--random-delay', `0s`);
-	circle.style.setProperty('--random-x', `${randomX}px`);
-	circle.style.setProperty('--random-y', `${randomY}px`);
+// Random animation
+document.querySelectorAll('.circles').forEach((circle) => {
+    let randomDuration = Math.random() * 500 + 50;
+    let randomAngle = Math.random() * 2 * Math.PI;
+    let speed = 590;
+    let randomX = Math.random() * (window.innerWidth - circle.offsetWidth);
+    let randomY = Math.random() * (window.innerHeight - circle.offsetHeight);
+    let randomMoveX = Math.cos(randomAngle) * speed;
+    let randomMoveY = Math.sin(randomAngle) * speed;
+
+    circle.style.setProperty('--random-duration', `${randomDuration}s`);
+    circle.style.setProperty('--random-delay', `0s`);
+    circle.style.setProperty('--random-x', `${randomX}px`);
+    circle.style.setProperty('--random-y', `${randomY}px`);
+    circle.style.setProperty('--random-move-x', `${randomMoveX}px`);
+    circle.style.setProperty('--random-move-y', `${randomMoveY}px`);
 });
-
-
-

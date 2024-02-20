@@ -14,6 +14,7 @@ body {
 	--spacing: 2em;
 
 	font-family: Helvetica;
+	font-style: italic;
 
 	padding: var(--spacing);
     justify-content: center;
@@ -23,34 +24,41 @@ body {
 }
 
 #channel-title {
-	font-weight: 700;
 	font-size: 1.5em;
-    margin-bottom: 1em;
-	position: absolute;
-	left: 50%;
-	top: 50%;
+	margin-bottom: 0.5em;
 }
 
 #channel-description {
 	font-size: 1em;
 }
 
+#channel-blocks {
+	margin-top: 16.3em;
+	padding-left: 30em;
+}
+
+#channel-users {
+	margin-top: 16.3em;
+	text-transform: lowercase;
+}
+
 @keyframes move {
-	0% { transform: translate(0, 0); }
-	100% { transform: translate(var(--random-x), var(--random-y)); }
-  }
+    0% { transform: translate(var(--random-x), var(--random-y)); }
+    100% { transform: translate(calc(var(--random-x) + var(--random-move-x)), calc(var(--random-y) + var(--random-move-y))); }
+}
 
 .circles li {
-    position: absolute;
+	position: absolute;
     display: inline-block;
     width: 5em;
     height: 5em;
     border-radius: 50%;
     overflow: hidden;
-	animation: move var(--random-duration) linear infinite var(--random-delay);
+    animation: move var(--random-duration) linear infinite var(--random-delay);
+    animation-iteration-count: infinite;
 }
 
-/* .circles li::before {
+.circles li::before {
     content: '';
     position: absolute;
     top: 0;
@@ -59,7 +67,7 @@ body {
     height: 100%;
     background-color: rgba(143, 143, 143, 0.2);
     border-radius: 50%;
-} */
+}
 
 .circles img {
     width: 100%;
