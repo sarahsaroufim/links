@@ -55,17 +55,21 @@ body {
     100% { transform: translate(calc(var(--random-x) + var(--random-move-x)), calc(var(--random-y) + var(--random-move-y))); }
 }
 
+
+
 .circle {
-	position: absolute;
+	position: fixed;
     width: 4.5vw;
     height: 4.5vw;
     border-radius: 50%;
     overflow: hidden;
-    animation: move var(--random-duration) linear infinite var(--random-delay);
-    animation-iteration-count: infinite;
+    /* animation: move var(--random-duration) linear infinite var(--random-delay);
+    animation-iteration-count: infinite; */
 	background-color: white;
+	left: var(--random-x);
+	top: var(--random-y);
 	filter: grayscale(100%) drop-shadow(0 0 0.5em white);
-	transition: transform 1s ease-;
+	transition: top 200ms linear, left 200ms linear;
 }
 
 .circle::before {
