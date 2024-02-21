@@ -55,8 +55,6 @@ body {
     100% { transform: translate(calc(var(--random-x) + var(--random-move-x)), calc(var(--random-y) + var(--random-move-y))); }
 }
 
-
-
 .circle {
 	position: fixed;
     width: 4.5vw;
@@ -68,7 +66,7 @@ body {
 	background-color: white;
 	left: var(--random-x);
 	top: var(--random-y);
-	filter: grayscale(100%) drop-shadow(0 0 0.5em white);
+	filter: drop-shadow(0 0 0.5em white);
 	transition: top 200ms linear, left 200ms linear;
 }
 
@@ -80,7 +78,7 @@ body {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-	box-shadow: inset -1.5em -1.5em 2.5em rgba(0,0,0,2);
+	box-shadow: inset -1.5em -1.5em 2.5em rgba(0,0,0,0.2);
 }
 
 .circle img {
