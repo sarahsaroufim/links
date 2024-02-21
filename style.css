@@ -5,10 +5,6 @@
 
 :root {
 	--pink: rgb(205, 75, 147);
-	--orange: rgb(244, 128, 0);
-	--yellow: rgb(255, 194, 0);
-	--green: rgb(105, 237, 149);
-	--blue: rgb(88, 182, 249);
 }
 
 main { max-width: 600px }
@@ -57,12 +53,10 @@ body {
 
 .circle {
 	position: fixed;
-    width: 4.5vw;
-    height: 4.5vw;
+    width: 4vw;
+    height: 4vw;
     border-radius: 50%;
     overflow: hidden;
-    /* animation: move var(--random-duration) linear infinite var(--random-delay);
-    animation-iteration-count: infinite; */
 	background-color: white;
 	left: var(--random-x);
 	top: var(--random-y);
