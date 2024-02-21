@@ -184,11 +184,11 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 document.querySelectorAll('.circle').forEach((circle) => {
     let randomDuration = Math.random() * 5 + 0.5;
     let maxX = window.innerWidth - circle.offsetWidth; // max x position
-    let maxHeight = 315; // max y position
+    let maxHeight = 320; // max y position
     let randomX = Math.random() * maxX;
     let randomY = Math.random() * maxHeight;
-    let speed = 1;
-    let randomAngle = Math.random() * 2 * Math.PI;
+    let speed = 3;
+    let randomAngle = Math.random() * 5 * Math.PI;
     let randomMoveX = Math.cos(randomAngle) * speed;
     let randomMoveY = Math.sin(randomAngle) * speed;
 
@@ -207,7 +207,7 @@ document.querySelectorAll('.circle').forEach((circle) => {
             randomMoveX *= -1; // reverse x direction
         }
 
-        if (randomY < 0 || randomY > maxHeight) {
+     	if (randomY < 0 || randomY > maxHeight) {
             randomMoveY *= -1; // reverse y direction
         }
 
@@ -215,7 +215,7 @@ document.querySelectorAll('.circle').forEach((circle) => {
         circle.style.setProperty('--random-y', `${randomY / window.innerHeight * 100}vh`);
     }
 
-    setInterval(updatePosition, 100); // update position every 100 millisecs
+    setInterval(updatePosition, 5000); // update position every 5 secs
 });
 
 
