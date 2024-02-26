@@ -1,20 +1,11 @@
-// if true, cuts title short '...'
-const CUT_LONG_TEXT = true;
-// maximum characters
-const CUT_OFF_THRESHOLD = 60;
-
 // This allows us to process/render the descriptions, which are in Markdown!
 // More about Markdown: https://en.wikipedia.org/wiki/Markdown
 let markdownIt = document.createElement('script')
 markdownIt.src = 'https://cdn.jsdelivr.net/npm/markdown-it@14.0.0/dist/markdown-it.min.js'
 document.head.appendChild(markdownIt)
 
-
-
 // Okay, Are.na stuff!
 let channelSlug = 'nirvaan' // The “slug” is just the end of the URL
-
-
 
 // First, let’s lay out some *functions*, starting with our basic metadata:
 let placeChannelInfo = (data) => {
@@ -30,8 +21,6 @@ let placeChannelInfo = (data) => {
 	channelCount.innerHTML = data.length
 	channelLink.href = `https://www.are.na/channel/${channelSlug}`
 }
-
-
 
 // Then our big function for specific-block-type rendering:
 let renderBlock = (block) => {
