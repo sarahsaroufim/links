@@ -260,5 +260,13 @@ let animationPaused = false;
 
 // toggle animation state
 function toggleAnimation() {
-	animationPaused = !animationPaused;
-	}
+animationPaused = !animationPaused;
+const toggleButton = document.querySelector('.toggle');
+if (animationPaused) {
+	toggleButton.textContent = "un-freeze time";
+	toggleButton.classList.add('active');
+} else {
+	toggleButton.textContent = "freeze time";
+	toggleButton.classList.remove('active');
+}
+}
