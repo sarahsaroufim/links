@@ -257,3 +257,8 @@ renderUser(data.user, channelUsers);
 
 // variable that tracks animation state
 let animationPaused = false;
+
+// toggle animation state
+function toggleAnimation() {
+	animationPaused = !animationPaused;
+	}
