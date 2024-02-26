@@ -1,4 +1,7 @@
-
+// if true, cuts title short '...'
+const CUT_LONG_TEXT = true;
+// maximum characters
+const CUT_OFF_THRESHOLD = 60;
 
 // This allows us to process/render the descriptions, which are in Markdown!
 // More about Markdown: https://en.wikipedia.org/wiki/Markdown
