@@ -81,3 +81,9 @@ body {
     object-fit: cover;
 }
 
+.hovering {
+	scale: 1.5;
+	transition: all 0.5s ease;
+	cursor: pointer;
+  }
+
