@@ -1,3 +1,5 @@
+
+
 // This allows us to process/render the descriptions, which are in Markdown!
 // More about Markdown: https://en.wikipedia.org/wiki/Markdown
 let markdownIt = document.createElement('script')
@@ -181,46 +183,77 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 		})
 
 // random animation
-document.querySelectorAll('.circle').forEach((circle) => {
-    let randomDuration = 5;
-    let maxX = window.innerWidth - circle.offsetWidth; // max x position
-    let maxHeight = window.innerHeight - circle.offsetWidth; // max y position
-    let randomX = Math.random() * maxX;
-    let randomY = Math.random() * maxHeight;
-    let speed = 1.5;
-    let randomAngle = Math.random() * 5 * Math.PI;
-    let randomMoveX = Math.cos(randomAngle) * speed;
-    let randomMoveY = Math.sin(randomAngle) * speed;
+document.querySelectorAll(".circle").forEach((circle) => {
 
-    circle.style.setProperty('--random-duration', `${randomDuration}s`);
-    circle.style.setProperty('--random-delay', `0s`);
-    circle.style.setProperty('--random-x', `${randomX / window.innerWidth * 100}vw`);
-    circle.style.setProperty('--random-y', `${randomY / window.innerHeight * 100}vh`);
-    circle.style.setProperty('--random-move-x', `${randomMoveX}px`);
-    circle.style.setProperty('--random-move-y', `${randomMoveY}px`);
+	// variable that keeps track of mouse hovering over circle
+	let hovering = false;
 
-    function updatePosition() {
-        randomX += randomMoveX;
-        randomY += randomMoveY;
+	circle.addEventListener("mouseover", () => {
+		hovering = true;
+		circle.classList.add("hovering"); // adds hovering class
+	});
 
-        if (randomX < 0 || randomX > maxX) {
-            randomMoveX *= -1; // reverse x direction
-        }
+	circle.addEventListener("mouseout", () => {
+		hovering = false;
+		circle.classList.remove("hovering"); // removes hovering class
+	});
 
-     	if (randomY < 0 || randomY > maxHeight) {
-            randomMoveY *= -1; // reverse y direction
-        }
+	let randomDuration = 5;
+	let maxX = window.innerWidth - circle.offsetWidth; // max x position
+	let maxHeight = window.innerHeight - circle.offsetHeight; // max y position
+	let randomX = Math.random() * maxX;
+	let randomY = Math.random() * maxHeight;
+	let speed = 1.5;
+	let randomAngle = Math.random() * 5 * Math.PI;
+	let randomMoveX = Math.cos(randomAngle) * speed;
+	let randomMoveY = Math.sin(randomAngle) * speed;
 
-        circle.style.setProperty('--random-x', `${randomX / window.innerWidth * 100}vw`);
-        circle.style.setProperty('--random-y', `${randomY / window.innerHeight * 100}vh`);
-    }
+	circle.style.setProperty("--random-duration", `${randomDuration}s`);
+	circle.style.setProperty("--random-delay", `0s`);
+	circle.style.setProperty(
+		"--random-x",
+		`${(randomX / window.innerWidth) * 100}vw`
+	);
+	circle.style.setProperty(
+		"--random-y",
+		`${(randomY / window.innerHeight) * 100}vh`
+	);
+	circle.style.setProperty("--random-move-x", `${randomMoveX}px`);
+	circle.style.setProperty("--random-move-y", `${randomMoveY}px`);
+
+	function updatePosition() {
+		if (!animationPaused && !hovering) {
+		randomX += randomMoveX;
+		randomY += randomMoveY;
+		if (randomX < 0 || randomX > maxX) {
+			randomMoveX *= -1; // reverse x direction
+		}
+
+		if (randomY < 0 || randomY > maxHeight) {
+			randomMoveY *= -1; // reverse y direction
+		}
+
+		circle.style.setProperty(
+			"--random-x",
+			`${(randomX / window.innerWidth) * 100}vw`
+		);
+		circle.style.setProperty(
+			"--random-y",
+			`${(randomY / window.innerHeight) * 100}vh`
+		);
+		}
+	}
+
+	setInterval(updatePosition, 200); // update position every 5 secs
+	});
 	
-    setInterval(updatePosition, 200); // update position every 5 secs
+
+// Also display the owner and collaborators:
+let channelUsers = document.getElementById("channel-users"); // Show them together
+data.collaborators.forEach((collaborator) =>
+renderUser(collaborator, channelUsers));
+renderUser(data.user, channelUsers);
 });
 
-
-		// Also display the owner and collaborators:
-		let channelUsers = document.getElementById('channel-users') // Show them together
-		data.collaborators.forEach((collaborator) => renderUser(collaborator, channelUsers))
-		renderUser(data.user, channelUsers)
-	})
+// variable that tracks animation state
+let animationPaused = false;
