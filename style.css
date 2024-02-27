@@ -28,23 +28,26 @@ body {
     margin: 0;
 }
 
+@media only screen and (min-width: 50px) {
+
 #channel-title {
 	font-size: var(--title-size);
-	margin-bottom: var(--gap);
+	margin-top: var(--spacing);
+	margin-bottom: calc(1.5 * var(--gap));
 }
 
 #channel-description {
-	width: 100%;
+	width: 19em;
 	font-size: var(--text-size);
 }
 
 #channel-blocks {
-	margin-top: 16.3em;
+	margin-top: 12em;
 	padding-left: 30em;
 }
 
 #channel-users {
-	margin-top: 16.3em;
+	margin-top: 12em;
 }
 
 @keyframes move {
@@ -54,8 +57,8 @@ body {
 
 .circle {
 	position: fixed;
-    width: 3.8em;
-    height: 3.8em;
+	width: 10vw;
+	height: 10vw;
     border-radius: 50%;
     overflow: hidden;
 	background-color: white;
@@ -200,26 +203,16 @@ body {
 }
 } */
 
-@media screen and (max-width: 680px) {
+}
 
-  }
-  
-@media screen and (max-width: 375px) {
+@media only screen and (min-width: 525px) {
 
-	#channel-title {
-		margin-top: var(--spacing);
-		font-size: 1.2em;
-	}
-	
-	.toggle,
-	#channel-description,
-	#channel-blocks,
-	#channel-users {
-		font-size: 0.8em;
-	}
+.circle {
+	max-width: 3.6em;
+	max-height: 3.6em;
+}
 
-	.circle {
-		width: 3em;
-		height: 3em;
-	}
+#channel-description {
+	width: 25em;
+}
 }
