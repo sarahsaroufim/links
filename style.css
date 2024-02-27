@@ -54,8 +54,8 @@ body {
 
 .circle {
 	position: fixed;
-    width: 3.5em;
-    height: 3.5em;
+    width: 3.8em;
+    height: 3.8em;
     border-radius: 50%;
     overflow: hidden;
 	background-color: white;
@@ -166,7 +166,7 @@ body {
 .go-back {
 	position: absolute;
 	color: var(--pink);
-	right: 1vw;
+	right: 2.1vw;
 	top: 1vw;
 	font-size: var(--text-size);
 	cursor: pointer;
