@@ -22,7 +22,6 @@ body {
 	font-family: Helvetica;
 	font-style: italic;
 	text-transform: lowercase;
-
 	padding: var(--spacing);
     justify-content: center;
     align-items: center;
@@ -91,7 +90,7 @@ body {
   }
 
 .toggle {
-	padding: 4px 8px;
+	padding: 0.25em 0.5em;
 	color: var(--pink);
 	background-color: white;
 	position: absolute;
@@ -118,52 +117,52 @@ body {
 	z-index: 1;
   }
 
-  .pop-container {
+.pop-container {
 	width: 100%;
 	height: 100vh;
 	background: rgba(0, 0, 0, 0.5);
-	backdrop-filter: blur(5px);
+	backdrop-filter: blur(0.3em);
 	position: absolute;
 	margin: -2em;
 	overflow: hidden;
 	z-index: 1;
 	/* display: grid; */
 	place-items: center;
-  }
+}
 
-  .pop {
+.pop {
 	position: relative;
 	/* display: flex; */
 	flex-direction: column;
 	min-width: 30vw;
 	padding: 2em;
 	background-color: white;
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+	box-shadow: 0 0 1.5em rgba(0, 0, 0, 0.6);
 	gap: var(--gap);
 	overflow: hidden;
-  }
+}
 
-  .pop #title {
+.pop #title {
 	font-size: var(--title-size);
 	margin-bottom: var(--gap);
 	max-width: 13em;
-  }
-  
-  .pop #description {
+}
+
+.pop #description {
 	font-size: var(--text-size);
 	margin-bottom: var(--gap);
 	max-height: 6em;
 	overflow-y: scroll;
 	/* width: 100%; */
-  }
-  
-  .pop #image {
+}
+
+.pop #image {
 	/* width: 100%; */
 	max-height: 28em;
 	object-fit: cover;
-  }
-  
-  .go-back {
+}
+
+.go-back {
 	position: absolute;
 	color: var(--pink);
 	right: 1vw;
@@ -171,9 +170,33 @@ body {
 	font-size: var(--text-size);
 	cursor: pointer;
 	user-select: none;
-  }
+}
 
-  .arrow {
+.arrow {
 	font-size: 0.7em;
 	font-weight: bold;
-  }
+}
+
+@keyframes pop-up {
+0% {
+	scale: 0;
+	opacity: 0;
+}
+
+100% {
+	scale: 1;
+	opacity: 1;
+}
+}
+
+@keyframes pop-down {
+0% {
+	scale: 1;
+	opacity: 1;
+}
+
+100% {
+	scale: 0;
+	opacity: 0;
+}
+}
