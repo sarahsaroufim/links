@@ -149,6 +149,7 @@ body {
 	font-size: var(--title-size);
 	margin-bottom: var(--gap);
 	max-width: 13em;
+	overflow: hidden;
 }
 
 .pop .description {
@@ -156,7 +157,7 @@ body {
 	margin-bottom: var(--gap);
 	max-height: 6em;
 	overflow-y: scroll;
-	max-width: 20em;
+	max-width: 21em;
 }
 
 .pop #image {
@@ -213,5 +214,9 @@ body {
 
 #channel-description {
 	width: 25em;
+}
+
+.pop .description {
+	max-width: 27em;
 }
 }

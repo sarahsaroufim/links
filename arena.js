@@ -37,7 +37,7 @@ function openWindowPop(circle) {
 	  type: get("class"),
 	};
 
-	//if null, don't show
+	// if null, don't show
 	if (dat.title !== "null") {
 	  document.querySelector("#title").innerHTML = dat.title;
 	}
@@ -119,7 +119,7 @@ let renderBlock = (block) => {
   let postdata = `data-key="${block.title}" data-id="${block.id}"`;
   postdata += `data-image="${block.image ? block.image.display.url : null}"`;
 	
-  // replaces " with ' in block descriptions
+  // replaces " with ' in block descriptions, just in case
   postdata += `data-description="${block.description_html ? block.description_html.replaceAll(/"/g, "'") : null}"`;
 
   postdata += `data-content="${block.content ? block.content : null}"`;
@@ -273,10 +273,12 @@ document.querySelectorAll(".circle").forEach((circle) => {
 	hovering = true;
 	circle.classList.add("hovering"); // adds hovering class
 
+	// makes block title appear on hover
 	popUp.innerText = circle.getAttribute("data-key");
 
-	if (popUp.innerText.length > 20) {
-		popUp.innerText = popUp.innerText.slice(0, 20) + " ...";
+	// cuts title short
+	if (popUp.innerText.length > 30) {
+	popUp.innerText = popUp.innerText.slice(0, 20) + " ...";
 	}
 
 	popUp.style.display = "block";
