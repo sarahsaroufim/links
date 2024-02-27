@@ -13,7 +13,7 @@ let blockdata = {};
 
 // popup block titles
 let popup = document.querySelector(".popup");
-popup.style.display = "none"; // Sets initial display to none;
+popup.style.display = "none"; // sets initial display to none
 let popcontainer = document.querySelector(".popcontainer");
 popcontainer.style.display = "none";
 
@@ -181,7 +181,7 @@ let renderUser = (user, container) => {
   let userAddress = `
 		<address>
 			<h3>${user.first_name}</h3>
-			<p><a href="https://are.na/${user.slug}">are.na profile</a></p>
+			<p><a href="https://are.na/${user.slug}">are.na profile<span class="arrow"> ↗&#xFE0E;</span></a></p>
 		</address>
 		`;
   container.insertAdjacentHTML("beforeend", userAddress);
