@@ -95,8 +95,8 @@ body {
 	background-color: white;
 	position: absolute;
 	z-index: 1;
-	top: 2.5vw;
-	right: 2.5vw;
+	top: 2em;
+	right: 2em;
 	transition: 0.5s ease;
 	cursor: pointer;
 	user-select: none;
@@ -205,6 +205,18 @@ body {
   }
   
 @media screen and (max-width: 375px) {
+
+	#channel-title {
+		margin-top: var(--spacing);
+		font-size: 1.2em;
+	}
+	
+	.toggle,
+	#channel-description,
+	#channel-blocks,
+	#channel-users {
+		font-size: 0.8em;
+	}
 
 	.circle {
 		width: 3em;
