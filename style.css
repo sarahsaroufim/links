@@ -151,12 +151,12 @@ body {
 	max-width: 13em;
 }
 
-.pop #description {
+.pop .description {
 	font-size: var(--text-size);
 	margin-bottom: var(--gap);
 	max-height: 6em;
 	overflow-y: scroll;
-	max-width: 23em;
+	max-width: 20em;
 }
 
 .pop #image {

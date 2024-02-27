@@ -21,32 +21,69 @@ let windowPop = document.querySelector(".pop");
 windowPop.style.display = "none";
 
 function openWindowPop(circle) {
-  const { title, description, link, image } = {
-    title: circle.getAttribute("data-key"),
-    description: circle.getAttribute("data-description"),
-    link: `https://www.are.na/block/${circle.getAttribute("data-id")}`,
-    image: circle.getAttribute("data-image"),
-  };
+	function get(id) {
+	  return circle.getAttribute(`data-${id}`);
+	}
 
-  document.getElementById("title").innerHTML = title === null ? "" : title;
-  document.getElementById("description").innerHTML =
-    description === null ? "" : description;
-  document.getElementById("link").href = link;
+  // dynamically gets data from are.na api
+	const dat = {
+	  title: get("key"),
+	  description: get("description"),
+	  link: `https://www.are.na/block/${get("id")}`,
+	  image: get("image"),
+	  content: get("content"),
+	  attachment_type: get("attachment-type"),
+	  attachment: get("attachment"),
+	  type: get("class"),
+	};
 
-  if (image == "null") {
-    document.getElementById("image").style.display = "none";
-  } else {
-    document.getElementById("image").style.display = "block";
-    document.getElementById("image").src = image;
+	//if null, don't show
+	if (dat.title !== "null") {
+	  document.querySelector("#title").innerHTML = dat.title;
+	}
+  
+	let d = [];
+  
+	// description
+	if (dat.description !== "null") {
+	  d.push(`<div class="description">${dat.description}</div>`);
+	}
+	// content
+	if (dat.content !== "null") {
+	  d.push(`<div class="description">${dat.content}</div>`);
+	}
+	// image
+	if (dat.image !== "null") {
+	  d.push(`<img id="image" src="${dat.image}" />`);
+	}
+  
+	if (dat.type == "Attachment") {
+	  if (dat.attachment_type.includes("video")) {
+		d.push(`<div><video controls src="${dat.attachment}"></video></div>`);
+	  } else if (dat.attachment_type.includes("audio")) {
+		d.push(
+		  `
+			  <div>
+			  <audio controls src="${dat.attachment}"></video>
+			  </div>
+			  `
+		);
+	  }
+	}
+  
+	document.getElementById("box-container").innerHTML = d.join("");
+  
+	document.getElementById("link").href = dat.link;
+  
+	console.log(dat);
+  
+	windowPop.style.display = "flex";
+	popContainer.style.display = "grid";
+	windowPop.style.animation = "pop-up .5s forwards";
   }
-
-  windowPop.style.display = "flex";
-  popContainer.style.display = "grid";
-  windowPop.style.animation = "pop-up 0.5s forwards";
-}
-
-function closeWindowPop() {
-	// windowPop.style.animation = "pop-down 0.5s forwards";
+  
+  function closeWindowPop() {
+	// windowPop.style.animation = "popdown 0.2s forwards";
 	// setTimeout(() => {
 	  windowPop.style.display = "none";
 	  popContainer.style.display = "none";
@@ -76,9 +113,27 @@ let renderBlock = (block) => {
 
   // Links!
 
+  // gives every circle a unique identity
+  let random = Math.floor(Math.random() * 2048) + 2;
+
+  let postdata = `data-key="${block.title}" data-id="${block.id}"`;
+  postdata += `data-image="${block.image ? block.image.display.url : null}"`;
+	
+  // replaces " with ' in block descriptions
+  postdata += `data-description="${block.description_html ? block.description_html.replaceAll(/"/g, "'") : null}"`;
+
+  postdata += `data-content="${block.content ? block.content : null}"`;
+
+  // attachment
+  postdata += `data-attachment-type="${block.attachment ? block.attachment.content_type : null}"`;
+
+  postdata += `data-attachment="${block.attachment ? block.attachment.url : null}"`;
+
+  postdata += `data-class="${block["class"]}"`;
+
   if (block.class == "Link") {
     let linkItem = `
-			<li class="circle" data-key="${block.title}" data-id="${block.id}" data-image="${block.image ? block.image.display.url : null}" data-description="${block.description_html}">
+			<li class="circle" ${postdata}>
 				<picture>
 					<source media="(max-width: 428px)" srcset="${block.image.thumb.url}">
 					<source media="(max-width: 640px)" srcset="${block.image.large.url}">
@@ -92,7 +147,7 @@ let renderBlock = (block) => {
   // Images!
   else if (block.class == "Image") {
     let imageItem = `
-            <li class="circle" data-key="${block.title}" data-id="${block.id}" data-image="${block.image ? block.image.display.url : null}" data-description="${block.description_html}">
+            <li class="circle" ${postdata}>
                 <img src="${block.image.large.url}" alt="${block.title}" by "${block.user.fullname}">
             </li>
         `;
@@ -102,7 +157,7 @@ let renderBlock = (block) => {
   // Text!
   else if (block.class == "Text") {
     let textItem = `
-			<li class="circle" data-key="${block.title}" data-id="${block.id}" data-image="${block.image ? block.image.display.url : null}" data-description="${block.description_html}">
+			<li class="circle" ${postdata}>
 				<blockquote>
 				${block.content_html}
 				</blockquote>
@@ -111,49 +166,49 @@ let renderBlock = (block) => {
     channelBlocks.insertAdjacentHTML("beforeend", textItem);
   }
 
-  // Uploaded (not linked) media…
-  else if (block.class == "Attachment") {
-    let attachment = block.attachment.content_type; // Save us some repetition
-
-    // Uploaded videos!
-    if (attachment.includes("video")) {
-      // …still up to you, but we’ll give you the `video` element:
-      let videoItem = `
-				<li class="circle" data-key="${block.title}" data-id="${block.id}" data-image="${block.image ? block.image.display.url : null}" data-description="${block.description_html}">
+    // Uploaded (not linked) media…
+	else if (block.class == "Attachment") {
+		let attachment = block.attachment.content_type; // Save us some repetition
+	
+	// Uploaded videos!
+	if (attachment.includes("video")) {
+		// …still up to you, but we’ll give you the `video` element:
+		let videoItem = `
+				<li class="circle" ${postdata}>
 					<video controls src="${block.attachment.url}"></video>
 				</li>
 				`;
-      channelBlocks.insertAdjacentHTML("beforeend", videoItem);
-      // More on video, like the `autoplay` attribute:
-      // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video
-    }
+		channelBlocks.insertAdjacentHTML("beforeend", videoItem);
+		// More on video, like the `autoplay` attribute:
+		// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video
+	}
 
-    // Uploaded PDFs!
-    else if (attachment.includes("pdf")) {
-      let pdfItem = `
-				<li class="circle" data-key="${block.title}" data-id="${block.id}" data-image="${block.image ? block.image.display.url : null}" data-description="${block.description_html}">
-                    <a href="${block.attachment.url}">
-                        <figure>
-                            <img src="${block.image.large.url}" alt="${block.title}">
-                        </figure>
-                    </a>
-                </li>
-            	`;
-      channelBlocks.insertAdjacentHTML("beforeend", pdfItem);
-    }
+	// Uploaded PDFs!
+	else if (attachment.includes("pdf")) {
+		let pdfItem = `
+				<li class="circle" ${postdata}>
+					<a href="${block.attachment.url}">
+						<figure>
+							<img src="${block.image.large.url}" alt="${block.title}">
+						</figure>
+					</a>
+				</li>
+			`;
+		channelBlocks.insertAdjacentHTML("beforeend", pdfItem);
+	}
 
     // Uploaded audio!
     else if (attachment.includes("audio")) {
-      // …still up to you, but here’s an `audio` element:
-      let audioItem = `
-				<li class="circle" data-key="${block.title}" data-id="${block.id}" data-image="${block.image ? block.image.display.url : null}" data-description="${block.description_html}">
-					<audio controls src="${block.attachment.url}"></video>
-				</li>
-				`;
-      channelBlocks.insertAdjacentHTML("beforeend", audioItem);
-      // More on audio: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio
-    }
-  }
+		// …still up to you, but here’s an `audio` element:
+		let audioItem = `
+				  <li class="circle" ${postdata}>
+					  <audio controls src="${block.attachment.url}"></video>
+				  </li>
+				  `;
+		channelBlocks.insertAdjacentHTML("beforeend", audioItem);
+		// More on audio: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio
+	  }
+	}
 
   // Linked media…
   else if (block.class == "Media") {
@@ -163,7 +218,7 @@ let renderBlock = (block) => {
     if (embed.includes("video")) {
       // …still up to you, but here’s an example `iframe` element:
       let linkedVideoItem = `
-				<li class="circle" data-key="${block.title}" data-id="${block.id}" data-image="${block.image ? block.image.display.url : null}" data-description="${block.description_html}">
+				<li class="circle" ${postdata}>
 					${block.embed.html}
 				</li>
 				`;
@@ -226,8 +281,10 @@ document.querySelectorAll(".circle").forEach((circle) => {
 
 	popUp.style.display = "block";
 
-	popUp.style.top = `${circle.offsetTop - 64 / 4}px`;
-	popUp.style.left = `${circle.offsetLeft - 64 / 4}px`;
+	// pop-up title position in relation to circle
+	popUp.style.top = `${circle.offsetTop - 96 / 2 + 20}px`;
+	popUp.style.left = `${circle.offsetLeft + 64 / 2}px`;
+	popUp.style.transform = "translate(-50%, -50%)";
 	});
 
 	circle.addEventListener("click", () => {
@@ -236,7 +293,6 @@ document.querySelectorAll(".circle").forEach((circle) => {
 
 	circle.addEventListener("mouseout", () => {
 	hovering = false;
-	// showTitleAt();
 	circle.classList.remove("hovering"); // removes hovering class
 	popUp.style.display = "none";
 	});
@@ -253,14 +309,8 @@ document.querySelectorAll(".circle").forEach((circle) => {
 
 	circle.style.setProperty("--random-duration", `${randomDuration}s`);
 	circle.style.setProperty("--random-delay", `0s`);
-	circle.style.setProperty(
-	"--random-x",
-	`${(randomX / window.innerWidth) * 100}vw`
-	);
-	circle.style.setProperty(
-	"--random-y",
-	`${(randomY / window.innerHeight) * 100}vh`
-	);
+	circle.style.setProperty("--random-x",`${(randomX / window.innerWidth) * 100}vw`);
+	circle.style.setProperty("--random-y",`${(randomY / window.innerHeight) * 100}vh`);
 	circle.style.setProperty("--random-move-x", `${randomMoveX}px`);
 	circle.style.setProperty("--random-move-y", `${randomMoveY}px`);
 
@@ -276,14 +326,8 @@ document.querySelectorAll(".circle").forEach((circle) => {
 		randomMoveY *= -1; // reverse y direction
 		}
 
-		circle.style.setProperty(
-		"--random-x",
-		`${(randomX / window.innerWidth) * 100}vw`
-		);
-		circle.style.setProperty(
-		"--random-y",
-		`${(randomY / window.innerHeight) * 100}vh`
-		);
+		circle.style.setProperty("--random-x",`${(randomX / window.innerWidth) * 100}vw`);
+		circle.style.setProperty("--random-y",`${(randomY / window.innerHeight) * 100}vh`);
 	}
 	}
 
