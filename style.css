@@ -3,13 +3,14 @@
 	--gap: 0.5em;
 	--text-size: 1em;
 	--title-size: 1.5em;
+	--spacing: 2em;
 }
 
 main { max-width: 600px }
 
 em { font-style: italic; }
 strong { font-weight: bold; }
-p { max-width: 25vw; }
+/* p { max-width: 25vw; } */
 a { color: var(--pink); }
 a:hover {
 	text-decoration: underline;
@@ -17,8 +18,6 @@ a:hover {
 }
 
 body {
-	--spacing: 2em;
-
 	font-family: Helvetica;
 	font-style: italic;
 	text-transform: lowercase;
@@ -35,6 +34,7 @@ body {
 }
 
 #channel-description {
+	width: 100%;
 	font-size: var(--text-size);
 }
 
@@ -54,8 +54,8 @@ body {
 
 .circle {
 	position: fixed;
-    width: 4vw;
-    height: 4vw;
+    width: 3.5em;
+    height: 3.5em;
     border-radius: 50%;
     overflow: hidden;
 	background-color: white;
@@ -153,6 +153,7 @@ body {
 	margin-bottom: var(--gap);
 	max-height: 6em;
 	overflow-y: scroll;
+	max-width: 26vw;
 	/* width: 100%; */
 }
 
@@ -189,7 +190,7 @@ body {
 }
 }
 
-@keyframes pop-down {
+/* @keyframes pop-down {
 0% {
 	opacity: 1;
 }
@@ -197,12 +198,16 @@ body {
 100% {
 	opacity: 0;
 }
-}
+} */
 
 @media screen and (max-width: 680px) {
 
   }
   
-  @media screen and (max-width: 480px) {
+@media screen and (max-width: 375px) {
 
-  }
+	.circle {
+		width: 3em;
+		height: 3em;
+	}
+}

@@ -46,12 +46,11 @@ function openWindowPop(circle) {
 }
 
 function closeWindowPop() {
-	windowPop.style.animation = "pop-down 0.3s forwards";
-	setTimeout(() => {
+	// windowPop.style.animation = "pop-down 0.5s forwards";
+	// setTimeout(() => {
 	  windowPop.style.display = "none";
 	  popContainer.style.display = "none";
-	}, 250);
-  }
+	}
 
 // First, let’s lay out some *functions*, starting with our basic metadata:
 let placeChannelInfo = (data) => {
