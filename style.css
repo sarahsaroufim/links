@@ -113,6 +113,7 @@ body {
 
 .pop-up {
 	height: 1.5em;
+	color: gray;
 	background-color: white;
 	position: absolute;
 	top: 0;
@@ -147,6 +148,7 @@ body {
 
 .pop #title {
 	font-size: var(--title-size);
+	margin-top: calc(2* var(--gap));
 	margin-bottom: var(--gap);
 	max-width: 13em;
 	overflow: hidden;
@@ -154,7 +156,7 @@ body {
 
 .pop .description {
 	font-size: var(--text-size);
-	margin-bottom: var(--gap);
+	margin-bottom: calc(2 * var(--gap));
 	max-height: 6em;
 	overflow-y: scroll;
 	max-width: 21em;
@@ -169,8 +171,8 @@ body {
 .go-back {
 	position: absolute;
 	color: var(--pink);
-	right: 2.1vw;
-	top: 1vw;
+	right: var(--spacing);
+	top: calc(2 * var(--gap));
 	font-size: var(--text-size);
 	cursor: pointer;
 	user-select: none;
