@@ -11,11 +11,11 @@ let channelSlug = "nirvaan"; // The “slug” is just the end of the URL
 // this holds all block data from are.na api
 let blockdata = {};
 
-// popup block titles
-let popup = document.querySelector(".popup");
-popup.style.display = "none"; // sets initial display to none
-let popcontainer = document.querySelector(".popcontainer");
-popcontainer.style.display = "none";
+// pop-up block titles
+let popUp = document.querySelector(".pop-up");
+popUp.style.display = "none"; // sets initial display to none
+let popContainer = document.querySelector(".pop-container");
+popContainer.style.display = "none";
 
 let windowPop = document.querySelector(".pop");
 windowPop.style.display = "none";
@@ -41,12 +41,12 @@ function openWindowPop(circle) {
   }
 
   windowPop.style.display = "flex";
-  popcontainer.style.display = "grid";
+  popContainer.style.display = "grid";
 }
 
 function closeWindowPop() {
   windowPop.style.display = "none";
-  popcontainer.style.display = "none";
+  popContainer.style.display = "none";
 }
 
 // First, let’s lay out some *functions*, starting with our basic metadata:
@@ -215,16 +215,16 @@ document.querySelectorAll(".circle").forEach((circle) => {
 	hovering = true;
 	circle.classList.add("hovering"); // adds hovering class
 
-	popup.innerText = circle.getAttribute("data-key");
+	popUp.innerText = circle.getAttribute("data-key");
 
-	if (popup.innerText.length > 20) {
-		popup.innerText = popup.innerText.slice(0, 20) + " ...";
+	if (popUp.innerText.length > 20) {
+		popUp.innerText = popUp.innerText.slice(0, 20) + " ...";
 	}
 
-	popup.style.display = "block";
+	popUp.style.display = "block";
 
-	popup.style.top = `${circle.offsetTop - 64 / 4}px`;
-	popup.style.left = `${circle.offsetLeft - 64 / 4}px`;
+	popUp.style.top = `${circle.offsetTop - 64 / 4}px`;
+	popUp.style.left = `${circle.offsetLeft - 64 / 4}px`;
 	});
 
 	circle.addEventListener("click", () => {
@@ -235,7 +235,7 @@ document.querySelectorAll(".circle").forEach((circle) => {
 	hovering = false;
 	// showTitleAt();
 	circle.classList.remove("hovering"); // removes hovering class
-	popup.style.display = "none";
+	popUp.style.display = "none";
 	});
 
 	let randomDuration = 5;
