@@ -1,5 +1,8 @@
 :root {
 	--pink: rgb(205, 75, 147);
+	--gap: 0.5em;
+	--text-size: 1em;
+	--title-size: 1.5em;
 }
 
 main { max-width: 600px }
@@ -28,12 +31,12 @@ body {
 }
 
 #channel-title {
-	font-size: 1.5em;
-	margin-bottom: 0.5em;
+	font-size: var(--title-size);
+	margin-bottom: var(--gap);
 }
 
 #channel-description {
-	font-size: 1em;
+	font-size: var(--text-size);
 }
 
 #channel-blocks {
@@ -107,7 +110,7 @@ body {
 }
 
 .popup {
-	height: 24px;
+	height: 1.5em;
 	background-color: white;
 	position: absolute;
 	top: 0;
@@ -135,28 +138,28 @@ body {
 	min-width: 30vw;
 	padding: 2em;
 	background-color: white;
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-	gap: 8px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+	gap: var(--gap);
 	overflow: hidden;
   }
 
   .pop #title {
-	font-size: 1.5em;
-	margin-bottom: 0.5em;
-	max-width: 12em;
+	font-size: var(--title-size);
+	margin-bottom: var(--gap);
+	max-width: 13em;
   }
   
   .pop #description {
-	font-size: 1em;
-	margin-bottom: 0.5em;
+	font-size: var(--text-size);
+	margin-bottom: var(--gap);
 	max-height: 6em;
 	overflow-y: scroll;
-	width: 100%;
+	/* width: 100%; */
   }
   
   .pop #image {
-	width: 100%;
-	max-height: 24.5em;
+	/* width: 100%; */
+	max-height: 28em;
 	object-fit: cover;
   }
   
@@ -165,7 +168,7 @@ body {
 	color: var(--pink);
 	right: 1vw;
 	top: 1vw;
-	font-size: 1em;
+	font-size: var(--text-size);
 	cursor: pointer;
 	user-select: none;
   }
