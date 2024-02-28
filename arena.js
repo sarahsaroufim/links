@@ -56,7 +56,7 @@ function openWindowPop(circle) {
 	if (dat.image !== "null") {
 	  d.push(`<img id="image" src="${dat.image}" />`);
 	}
-  
+	// attachment
 	if (dat.type == "Attachment") {
 	  if (dat.attachment_type.includes("video")) {
 		d.push(`<div><video controls src="${dat.attachment}"></video></div>`);
@@ -117,6 +117,11 @@ let renderBlock = (block) => {
   postdata += `data-image="${block.image ? block.image.display.url : null}"`;
   postdata += `data-description="${block.description_html ? block.description_html.replaceAll(/"/g, "'") : null}"`;
   postdata += `data-content="${block.content ? block.content : null}"`;
+
+  // attachment
+  postdata += `data-attachment-type="${block.attachment ? block.attachment.content_type : null}"`;
+  postdata += `data-attachment="${block.attachment ? block.attachment.url : null}"`;
+  postdata += `data-class="${block["class"]}"`;
 
   if (block.class == "Link") {
     let linkItem = `
