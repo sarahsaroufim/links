@@ -221,6 +221,14 @@ body {
 	width: 25em;
 }
 
+.pop {
+	max-width: 30%;
+}
+
+.pop #title {
+	overflow: visible;
+}
+
 .pop .description {
 	max-width: 27em;
 }

@@ -25,7 +25,6 @@ function openWindowPop(circle) {
 	  return circle.getAttribute(`data-${id}`);
 	}
 
-  // dynamically gets data from are.na api
 	const dat = {
 	  title: get("key"),
 	  description: get("description"),
@@ -258,7 +257,7 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, {
 // random animation
 document.querySelectorAll(".circle").forEach((circle) => {
 
-	// A variable that keeps track whether mouse of hovering over the circle.
+	// keeps track whether mouse is hovering over the circle
 	let hovering = false;
 
 	circle.addEventListener("mouseover", () => {
@@ -325,7 +324,7 @@ document.querySelectorAll(".circle").forEach((circle) => {
 	}
 	}
 
-	setInterval(updatePosition, 200); // update position every 5 secs
+	setInterval(updatePosition, 150); // update position every x secs
 });
 
 // Also display the owner and collaborators:
@@ -336,7 +335,7 @@ data.collaborators.forEach((collaborator) =>
 	renderUser(data.user, channelUsers);
 	});
 
-// variable that tracks animation state
+// tracks animation state
 let animationPaused = false;
 
 // toggle animation state
