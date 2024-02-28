@@ -113,23 +113,10 @@ let renderBlock = (block) => {
 
   // Links!
 
-  // gives every circle a unique identity
-  let random = Math.floor(Math.random() * 2048) + 2;
-
   let postdata = `data-key="${block.title}" data-id="${block.id}"`;
   postdata += `data-image="${block.image ? block.image.display.url : null}"`;
-	
-  // replaces " with ' in block descriptions, just in case
   postdata += `data-description="${block.description_html ? block.description_html.replaceAll(/"/g, "'") : null}"`;
-
   postdata += `data-content="${block.content ? block.content : null}"`;
-
-  // attachment
-  postdata += `data-attachment-type="${block.attachment ? block.attachment.content_type : null}"`;
-
-  postdata += `data-attachment="${block.attachment ? block.attachment.url : null}"`;
-
-  postdata += `data-class="${block["class"]}"`;
 
   if (block.class == "Link") {
     let linkItem = `

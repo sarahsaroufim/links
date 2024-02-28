@@ -116,6 +116,9 @@ body {
 	color: gray;
 	background-color: white;
 	position: absolute;
+	padding-left: calc(0.6 * var(--gap));
+	padding-right: calc(0.6 * var(--gap));
+	padding-top: calc(0.15 * var(--gap));
 	top: 0;
 	left: 0;
 	z-index: 1;
@@ -170,7 +173,7 @@ body {
 
 .go-back {
 	position: absolute;
-	color: var(--pink);
+	color: gray;
 	right: var(--spacing);
 	top: calc(2 * var(--gap));
 	font-size: var(--text-size);
