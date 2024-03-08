@@ -1,5 +1,6 @@
 :root {
 	--pink: rgb(205, 75, 147);
+	--gray: rgb(200, 200, 200);
 	--gap: 0.5em;
 	--text-size: 1em;
 	--title-size: 1.5em;
@@ -34,11 +35,13 @@ body {
 	font-size: var(--title-size);
 	margin-top: var(--spacing);
 	margin-bottom: calc(1.5 * var(--gap));
+	color: var(--gray);
 }
 
 #channel-description {
 	width: 19em;
 	font-size: var(--text-size);
+	color: var(--gray);
 }
 
 #channel-blocks {
@@ -46,8 +49,14 @@ body {
 	padding-left: 30em;
 }
 
+#capsules,
+#channel-count {
+	color: var(--gray);
+}
+
 #channel-users {
 	margin-top: 12em;
+	color: var(--gray);
 }
 
 @keyframes move {
@@ -64,7 +73,7 @@ body {
 	background-color: white;
 	left: var(--random-x);
 	top: var(--random-y);
-	filter: drop-shadow(0 0 0.5em white);
+	filter: drop-shadow(0 0 0.2em rgba(0, 0, 0, 0.85));
 	transition: top 200ms linear, left 200ms linear;
 	transition: scale 0.5s ease;
 }
@@ -113,7 +122,6 @@ body {
 
 .pop-up {
 	height: 1.5em;
-	color: gray;
 	background-color: white;
 	position: absolute;
 	padding-left: calc(0.6 * var(--gap));
@@ -144,6 +152,7 @@ body {
 	min-width: 30vw;
 	padding: 2em;
 	background-color: white;
+	border-radius: 1%;
 	box-shadow: 0 0 1.5em rgba(0, 0, 0, 0.6);
 	gap: var(--gap);
 	overflow: hidden;
@@ -173,7 +182,7 @@ body {
 
 .go-back {
 	position: absolute;
-	color: gray;
+	color: var(--gray);
 	right: var(--spacing);
 	top: calc(2 * var(--gap));
 	font-size: var(--text-size);
