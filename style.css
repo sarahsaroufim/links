@@ -152,7 +152,6 @@ body {
 	min-width: 30vw;
 	padding: 2em;
 	background-color: white;
-	border-radius: 1%;
 	box-shadow: 0 0 1.5em rgba(0, 0, 0, 0.6);
 	gap: var(--gap);
 	overflow: hidden;
